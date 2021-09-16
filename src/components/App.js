@@ -29,7 +29,23 @@ function App() {
        setToyArray([...toys,newToy])
      }
 
+  // const deleteToy=(id)=> {
+  //      fetch(`http://localhost:3001/toys/${id}`,{
+  //        method: "DELETE"})
+  //        .then((r) => r.json())  
+  //         .then(setToyArray(toys.splice(id - 1 , 1, null)))
+  // }
     
+  const deleteToy= (deletedToy)=> {
+    const copy =toys.filter(toy => toy.id !== deletedToy.id);
+
+    fetch( fetch(`http://localhost:3001/toys/${deletedToy.id}`, {
+      method: "DELETE"
+      })
+      .then(res => res.json())
+      .then(setToyArray(copy))
+    )}
+
 
     const postToy =(e)=>{
       fetch(url,{
@@ -55,7 +71,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} renderUpdatedToy= {renderUpdatedToy}/>
+      <ToyContainer toys={toys} renderUpdatedToy= {renderUpdatedToy} deleteToy={deleteToy}/>
     </>
   );
 }

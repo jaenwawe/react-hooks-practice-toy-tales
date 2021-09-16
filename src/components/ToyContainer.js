@@ -3,7 +3,7 @@ import ToyCard from "./ToyCard";
 
 
 
-function ToyContainer({toys, renderUpdatedToy}) {
+function ToyContainer({toys, renderUpdatedToy, deleteToy}) {
 
   
 
@@ -12,7 +12,7 @@ function ToyContainer({toys, renderUpdatedToy}) {
 
   return (
     <div id="toy-collection">
-      {toys.map(toy=> <ToyCard toy={toy} renderUpdatedToy={renderUpdatedToy} />)}
+      {toys.map(toy=> <ToyCard toy={toy} renderUpdatedToy={renderUpdatedToy} deleteToy={deleteToy}/>)}
     </div>
   );
 }

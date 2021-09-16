@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 
-function ToyCard ({toy,renderUpdatedToy}){
+function ToyCard ({toy,renderUpdatedToy, deleteToy}){
   
   const addLike = ()=>  {
    const currentLikes = toy.likes++
@@ -33,7 +33,7 @@ function ToyCard ({toy,renderUpdatedToy}){
       />
       <p>{toy.likes} Likes </p>
       <button className="like-btn" onClick={addLike} > Like {"<3"}</button>
-      <button className="del-btn">Donate to GoodWill</button>
+      <button className="del-btn" onClick={() => deleteToy(toy)}> Donate to GoodWill</button>
     </div>
   );
 }
