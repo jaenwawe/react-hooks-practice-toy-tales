@@ -1,6 +1,6 @@
 import React from "react";
 
-function ToyForm({postToy}) {
+function ToyForm({postToy, renderUpdatedToy}) {
   return (
     <div className="container">
       <form className="add-toy-form" onSubmit={(e)=>postToy(e)}>

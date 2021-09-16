@@ -9,17 +9,29 @@ function App() {
 
   function handleClick() { setShowForm((showForm) => !showForm);}
     
+  const [toys, setToyArray] = useState([])
+  const url="http://localhost:3001/toys"
+
+
+    const renderUpdatedToy =(updatedToy)=>{
+      setToyArray( toys.map(toy=> updatedToy.id === toy.id ? toy=updatedToy: toy=toy))
+   
+    }
+
     useEffect(()=>{
       fetch(url)
       .then(r=>r.json())
       .then(toyData=>setToyArray(toyData))
      },[])
+
+
+  const addToToys=(newToy)=> {
+       setToyArray([...toys,newToy])
+     }
+
     
-    const [toys, setToyArray] = useState([])
-    const url="http://localhost:3001/toys"
-   
-   
-      const postToy = (e)=>  {
+
+    const postToy =(e)=>{
       fetch(url,{
         method: "POST",
         headers: 
@@ -33,9 +45,8 @@ function App() {
          })
       })
       .then(r=>r.json())
-      .then(toyData=>setToyArray(toyData))
+      .then(newToy=>setToyArray(newToy))
     }
-  
 
   return (
     <>
@@ -44,7 +55,7 @@ function App() {
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
-      <ToyContainer toys={toys} />
+      <ToyContainer toys={toys} renderUpdatedToy= {renderUpdatedToy}/>
     </>
   );
 }
